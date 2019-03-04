@@ -54,18 +54,6 @@ namespace ConsumirWebService.Controllers
         //Asincrono
         public async Task<ActionResult> Index() {
 
-            /*using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://localhost:44365/api/");
-                HttpResponseMessage responseMessage = await client.GetAsync("posts");
-                if (responseMessage.IsSuccessStatusCode)
-                {
-                    var responseData = responseMessagehttps://localhost:44365/api/.Content.ReadAsStringAsync().Result;
-                    var post = JsonConvert.DeserializeObject<List<Post>>(responseData);
-                    return View(post);
-                }
-                return Json(new { post = "Error" }, JsonRequestBehavior.AllowGet);
-            }*/
             HttpResponseMessage responseMessage = await client.GetAsync(url);
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -76,45 +64,7 @@ namespace ConsumirWebService.Controllers
             return Json(new { post = "Error" }, JsonRequestBehavior.AllowGet);
 
         }
-        /*public ActionResult Index()
-        {
-            IEnumerable<Post> posts = null;
-
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(UrlBase);
-
-                //HTTP GET
-                try
-                {
-
-
-                    var response = client.GetAsync("posts");
-                    response.Wait();
-
-                    var result = response.Result;
-                    if (result.IsSuccessStatusCode)
-                    {
-                        var readTask = result.Content.ReadAsAsync<IList<Post>>();
-                        readTask.Wait();
-                        posts = readTask.Result;
-                    }
-                    else
-                    {
-                        posts = Enumerable.Empty<Post>();
-                        ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
-
-                    }
-                }
-                catch (Exception ex) {
-                    posts = Enumerable.Empty<Post>();
-                    ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
-                }
-            }
-            return View(posts);
-            //return Json(posts, JsonRequestBehavior.AllowGet);
-            
-        }*/
+        
 
         public ActionResult Create() {
             return View();
